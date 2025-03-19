@@ -13,6 +13,12 @@ import { getHeaderContent } from "lib/cms-content/getHeaderContent"
 import { redirect } from "next/navigation"
 import Script from "next/script"
 
+import { SessionProvider } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "lib/auth/auth"; // Define auth options in lib/auth.ts
+import ClientSessionProvider from "lib/auth/SessionProvider";
+import MembersBanner from "components/agility-components/MembersBanner"
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -25,6 +31,8 @@ export default async function RootLayout({
 }) {
   const { locale, sitemap, isDevelopmentMode, isPreview } = await useAgilityContext()
   const header = await getHeaderContent({ sitemap, locale })
+
+  const session = await getServerSession(authOptions);
 
   async function startPreviewMode(pathname: string) {
     "use server";
@@ -46,6 +54,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body data-agility-guid={process.env.AGILITY_GUID}>
+      <ClientSessionProvider session={session}>
         <div id="site-wrapper">
           <div id="site">
             <PreviewBar
@@ -60,6 +69,7 @@ export default async function RootLayout({
             </div>
           </div>
         </div>
+        </ClientSessionProvider>
       </body>
       <Script src="https://unpkg.com/@agility/web-studio-sdk@latest/dist/index.js" />
     </html>

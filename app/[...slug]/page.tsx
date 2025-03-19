@@ -10,10 +10,15 @@ import NotFound from "./not-found"
 import InlineError from "components/common/InlineError"
 import {SitemapNode} from "lib/types/SitemapNode"
 import {notFound} from "next/navigation"
+import { getServerSession } from "next-auth"
+import { authOptions } from "lib/auth/auth"
+import { getSession } from "next-auth/react"
+import { cookies, headers } from "next/headers"
 
-export const revalidate = 60
+export const revalidate = 0
 export const runtime = "nodejs"
-export const dynamic = "force-static"
+export const experimental_ppr = true
+// export const dynamic = "force-dynamic"
 
 /**
  * Generate the list of pages that we want to generate a build time.

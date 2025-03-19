@@ -1,9 +1,25 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getDynamicPageURL } from "@agility/nextjs/node"
+import { getToken } from 'next-auth/jwt';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
+
+	// console.log("🔍 Cookies on SSR Request:", request.cookies.getAll());
+
+	const token = await getToken({ req:request, secret: process.env.NEXTAUTH_SECRET });
+	const protectedRoutes = ["/members"];
+
+	if (protectedRoutes.includes(request.nextUrl.pathname)) {
+	  // If no token, redirect to sign-in
+	  if (!token) {
+		const url = new URL("/signin", request.url);
+		url.searchParams.set("callbackUrl", request.nextUrl.pathname); // Store where to redirect after login
+		return NextResponse.redirect(url);
+	  }
+	}
+  
 
 
 	/*****************************
@@ -60,6 +76,6 @@ export const config = {
 		 * - _next/image (image optimization files)
 		 * - favicon.ico (favicon file)
 		 */
-		'/((?!api|_next/static|_next/image|favicon.ico).*)',
+		'/((?!api|_next/static|_next/image|favicon.ico|).*)',
 	],
 }

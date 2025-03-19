@@ -6,4 +6,5 @@ export { default} from "./[...slug]/page"
 
 export const revalidate = 60
 export const runtime = "nodejs"
-export const dynamic = "force-static"
+export const experimental_ppr = true
+// export const dynamic = "force-static"
