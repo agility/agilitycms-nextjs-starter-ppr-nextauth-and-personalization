@@ -5,7 +5,7 @@ import PostDetails from "./PostDetails";
 import Heading from "./Heading";
 import TextBlockWithImage from "./TextBlockWithImage";
 import NoComponentFound from "./NoComponentFound";
-import MembersBanner from "./MembersBanner";
+import MembersBanner from "./MembersBanner/MembersBanner";
 
 
 // All of the Agility Page Module Components that are in use in this site need to be imported into this index file.
@@ -18,7 +18,7 @@ const allModules = [
 	{ name: "PostsListing", module: PostsListing },
 	{ name: "PostDetails", module: PostDetails },
 	{ name: "RichTextArea", module: RichTextArea },
-	{ name: "MembersBanner", module: MembersBanner}
+	{ name: "MembersBanner", module: MembersBanner }
 ];
 
 /**

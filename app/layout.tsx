@@ -17,7 +17,7 @@ import { SessionProvider } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "lib/auth/auth"; // Define auth options in lib/auth.ts
 import ClientSessionProvider from "lib/auth/SessionProvider";
-import MembersBanner from "components/agility-components/MembersBanner"
+import MembersBanner from "components/agility-components/MembersBanner/MembersBanner"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,21 +54,21 @@ export default async function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body data-agility-guid={process.env.AGILITY_GUID}>
-      <ClientSessionProvider session={session}>
-        <div id="site-wrapper">
-          <div id="site">
-            <PreviewBar
-              {...{ isDevelopmentMode, isPreview, startPreviewMode }}
-            />
+        <ClientSessionProvider session={session}>
+          <div id="site-wrapper">
+            <div id="site">
+              <PreviewBar
+                {...{ isDevelopmentMode, isPreview, startPreviewMode }}
+              />
 
-            <div className="flex flex-col min-h-screen">
-              <SiteHeader {...{ header }} />
+              <div className="flex flex-col min-h-screen">
+                <SiteHeader {...{ header }} />
 
-              <main className={`flex-grow`}>{children}</main>
-              <SiteFooter />
+                <main className={`flex-grow`}>{children}</main>
+                <SiteFooter />
+              </div>
             </div>
           </div>
-        </div>
         </ClientSessionProvider>
       </body>
       <Script src="https://unpkg.com/@agility/web-studio-sdk@latest/dist/index.js" />
