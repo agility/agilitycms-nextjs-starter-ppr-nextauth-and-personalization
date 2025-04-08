@@ -9,13 +9,12 @@ import { authOptions } from "lib/auth/auth";
 
 
 const MembersBanner = async () => {
-  const session = await getServerSession(authOptions);
 
   return (
     <Suspense fallback={<MembersSkeleton />}>
-      {/* @XXts-expect-error Server Component */}
-      {/* <MembersBannerDynamic /> */}
-      <MembersSkeleton />
+      {/* @ts-expect-error Server Component */}
+      <MembersBannerDynamic />
+
 
     </Suspense>
   )
