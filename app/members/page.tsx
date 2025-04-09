@@ -5,6 +5,7 @@ import { getContentList } from "lib/cms/getContentList";
 import Link from "next/link";
 import Image from "next/image";
 import getAgilitySDK from "lib/cms/getAgilitySDK";
+import { CgSpinner } from "react-icons/cg";
 
 export default async function MembersPage() {
   // Get session on the server
@@ -14,6 +15,8 @@ export default async function MembersPage() {
   if (!session) {
     redirect("/signin");
   }
+
+
 
   const agilitySDK = await getAgilitySDK()
 
@@ -53,11 +56,11 @@ export default async function MembersPage() {
   const { picture, playerName, lastGameScore } = stat.fields || {};
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[100vh] bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg text-center">
         <h1 className="text-2xl font-bold">Welcome, {session.user?.name} 👋</h1>
         <p className="text-gray-600 mt-2">
-          You&apos;re now inside the members-only area.
+          You are now inside the members-only area.
         </p>
         <p>The time is {new Date().toLocaleTimeString()}.</p>
       </div>
@@ -89,5 +92,6 @@ export default async function MembersPage() {
         </Link>
       </div>
     </div>
+
   );
 }

@@ -37,7 +37,7 @@ export const MembersBannerDynamic = async () => {
 
   const { picture, playerName, lastGameScore } = user?.items[0]?.fields || {}
 
-  //do an await sleep for 1 second
+  //HACK do an await sleep for 1 second so we can see the skeleton loading
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
 

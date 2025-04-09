@@ -1,6 +1,6 @@
 import Image from "next/image"
 import React from "react"
-import {FaXTwitter, FaInstagram, FaSlack, FaYoutube} from "react-icons/fa6"
+import { FaXTwitter, FaInstagram, FaSlack, FaYoutube } from "react-icons/fa6"
 
 /**
  * This footer is not part of the content in the CMS, feel free to remove this for production use.
@@ -72,6 +72,8 @@ const SiteFooter = () => {
 						>
 							Contact Us
 						</a>
+
+						<span> The time is {new Date().toLocaleTimeString()}</span>
 					</p>
 				</div>
 				<div className="flex-1-grow">
